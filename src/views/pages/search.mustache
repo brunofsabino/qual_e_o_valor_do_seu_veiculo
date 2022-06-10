@@ -1,7 +1,14 @@
 
 
-{{#option}}
-        
-{{/option}}
 
-<li>{{option}}</li>
+
+<select class="form-select" name="select">
+    <option></option>
+    {{#option}}
+    <option onClick="select(this)">{{.}} </option>
+   {{/option}}
+    
+</select>
+
+
+<script src="/js/script.js"></script>

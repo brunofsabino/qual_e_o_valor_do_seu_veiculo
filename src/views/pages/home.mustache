@@ -1,11 +1,115 @@
-<form method="post" action="/search">
+{{>partials/header}}
+
+
+<form method="post" action="/">
     <h2>Escolha o tipo de veiculo a ser pesquisado:</h2>
-<select class="form-select" name="select">
+<select class="form-select" name="select" onchange="mostraAlerta()" >
     <option></option>
-    <option value="1">Consulta de Carros e utilitários pequenos</option>
-    <option value="2">Consulta de Caminhões e Micro-Ônibus</option>
-    <option value="3">Consulta de motos</option>
+    <option select="1" {{#carro}} selected {{/carro}} >Consulta de Carros e utilitários pequenos</option>
+    <option select="2"  {{#caminhao}} selected {{/caminhao}}>Consulta de Caminhões e Micro-Ônibus</option>
+    <option select="3" {{#moto}} selected {{/moto}} >Consulta de motos</option>
     
 </select>
-<button>Pesquisar</button>
+{{#formSelect}}
+<select class="form-select-1" name="select1" onchange="mostraAlerta()" >
+    <option></option>
+    {{#marcaVeiculo}}
+        <option value="{{marcaVeiculo}}" selected> {{marcaVeiculo}} </option>
+    {{/marcaVeiculo}}
+    {{#option}}
+    <option value="{{.}}" > {{.}} </option>
+    {{/option}}
+</select>
+{{/formSelect}}
+
+{{#formSelectModel}}
+<select class="form-select-2" name="select2" onchange="mostraAlerta()" >
+    <option></option>
+    {{#modeloVeiculo}}
+        <option value="{{modeloVeiculo}}" selected> {{modeloVeiculo}} </option> 
+    {{/modeloVeiculo}}  
+    {{#option2}}
+        <option >{{.}} </option>
+   {{/option2}}
+   
+</select>
+{{/formSelectModel}}
+
+{{#formSelectAnoCar}}
+<select class="form-select-3" name="select3" onchange="mostraAlerta()" >
+    <option></option>
+    {{#anoVeiculo}}
+        <option value="{{anoVeiculo}}" selected> {{anoVeiculo}} </option> 
+    {{/anoVeiculo}} 
+    
+    {{#option3}}
+        <option >{{.}} </option>
+   {{/option3}}
+   
+</select>
+{{/formSelectAnoCar}}
+
+
+<script src="/js/script.js"></script>
+<a href="/">Nova pesquisa</a>
 </form>
+
+{{#mesReferencia}}
+Mês de Referencia: {{mesReferencia}}<br>
+Código Fipe:  {{codigoFipe}}<br>
+Marca: {{marca}}<br>
+Modelo: {{modelo}}<br>
+Ano Modelo: {{anoModelo}}<br>
+Autentificação: {{autenficacao}}<br>
+Data da Consulta: {{dataConsulta}}<br>
+Preço Médio: {{precoMedio}}                
+{{/mesReferencia}}
+
+{{#anunciosSelects}}
+<div class="anuncios-area">
+    {{#anuncio1}}
+        <a href="{{anuncio1.link}}">
+            <h1>{{anuncio1.title}}</h1>
+            <h2>{{anuncio1.anoEKmVeiculo}}</h2>
+            <img src="{{anuncio1.img}}" alt="" style="width: 300px">
+            <h3>R$ {{anuncio1.precoVeiculow}}</h3>
+        </a>
+    {{/anuncio1}} <br><br>
+    {{#anuncio2}}
+        <a href="{{anuncio2.link}}">
+            <h1>{{anuncio2.title}}</h1>
+            <h2>{{anuncio2.anoEKmVeiculo}}</h2>
+            <img src="{{anuncio2.img}}" alt="" style="width: 300px">
+            <h3>R$ {{anuncio2.precoVeiculow}}</h3>
+        </a>
+    {{/anuncio2}} <br><br>
+    {{#anuncio3}}
+        <a href="{{anuncio3.link}}">
+            <h1>{{anuncio3.title}}</h1>
+            <h2>{{anuncio3.anoEKmVeiculo}}</h2>
+            <img src="{{anuncio3.img}}" alt="" style="width: 300px">
+            <h3>R$ {{anuncio3.precoVeiculow}}</h3>
+        </a>
+    {{/anuncio3}} <br><br>
+    {{#anuncio4}}
+        <a href="{{anuncio4.link}}">
+            <h1>{{anuncio4.title}}</h1>
+            <h2>{{anuncio4.anoEKmVeiculo}}</h2>
+            <img src="{{anuncio4.img}}" alt="" style="width: 300px">
+            <h3>R$ {{anuncio4.precoVeiculow}}</h3>
+        </a>
+    {{/anuncio4}} <br><br>
+    {{#anuncio5}}
+        <a href="{{anuncio5.link}}">
+            <h1>{{anuncio5.title}}</h1>
+            <h2>{{anuncio5.anoEKmVeiculo}}</h2>
+            <img src="{{anuncio5.img}}" alt="" style="width: 300px">
+            <h3>R$ {{anuncio5.precoVeiculow}}</h3>
+        </a>
+    {{/anuncio5}} <br><br>
+</div>
+{{/anunciosSelects}}
+
+
+
+{{>partials/footer}}

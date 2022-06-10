@@ -6,7 +6,7 @@ const router = Router()
 
 router.get('/', veiculosController.home)
 
-router.post('/search', searchController.searchVeiculos)
+router.post('/', searchController.searchVeiculos)
 
 
 export default router
