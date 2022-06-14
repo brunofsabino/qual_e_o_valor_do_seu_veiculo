@@ -51,7 +51,9 @@
 
 
 <script src="/js/script.js"></script>
+{{#mostrarBotao}}
 <a href="/">Nova pesquisa</a>
+{{/mostrarBotao}}
 </form>
 
 {{#mesReferencia}}
@@ -109,6 +111,38 @@ Preço Médio: {{precoMedio}}
     {{/anuncio5}} <br><br>
 </div>
 {{/anunciosSelects}}
+
+{{#anunciosSelectsIcarros}}
+<div class="anuncios-area">
+    {{#anuncioIcarros1}}
+        <a href="{{anuncioIcarros1.link}}">
+            <h1>{{anuncioIcarros1.title}}</h1>
+            <h2>{{anuncioIcarros1.anoEKmVeiculo}}</h2>
+            <img src="{{anuncioIcarros1.img}}" alt="" style="width: 300px">
+            <h3>R$ {{anuncioIcarros1.precoVeiculow}}</h3>
+        </a>
+    {{/anuncioIcarros1}} <br><br>
+    {{#anuncioIcarros2}}
+        <a href="{{anuncioIcarros2.link}}">
+            <h1>{{anuncioIcarros2.title}}</h1>
+            <h2>{{anuncioIcarros2.anoEKmVeiculo}}</h2>
+            <img src="{{anuncioIcarros2.img}}" alt="" style="width: 300px">
+            <h3>R$ {{anuncioIcarros2.precoVeiculow}}</h3>
+        </a>
+    {{/anuncioIcarros2}} <br><br>
+    {{#anuncioIcarros3}}
+        <a href="{{anuncioIcarros3.link}}">
+            <h1>{{anuncioIcarros3.title}}</h1>
+            <h2>{{anuncioIcarros3.anoEKmVeiculo}}</h2>
+            <img src="{{anuncioIcarros3.img}}" alt="" style="width: 300px">
+            <h3>R$ {{anuncioIcarros3.precoVeiculow}}</h3>
+        </a>
+    {{/anuncioIcarros3}} <br><br>
+    <br><br>
+</div>
+{{/anunciosSelectsIcarros}}
+
+
 
 
 

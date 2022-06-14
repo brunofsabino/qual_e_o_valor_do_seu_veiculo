@@ -12,7 +12,9 @@ export const searchVeiculos = (req: Request, response: Response) => {
     // let option6: string[]  = ['']
     let formSelectModel = false
     let formSelectAnoCar = false
+    let mostrarBotao = false
     let anunciosSelects = false
+    let anunciosSelectsIcarros = false
 
     let dados = req.body.select
     let marcaVeiculo = req.body.select1
@@ -31,7 +33,8 @@ export const searchVeiculos = (req: Request, response: Response) => {
     if(dados) {
      ;(async () => {
         const list = []
-        const browser = await puppeteer.launch({headless: false});
+        const listIcarros = []
+        const browser = await puppeteer.launch({headless: true});
         const page = await browser.newPage();
         await page.goto(url,{ timeout: 0});
         
@@ -45,6 +48,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
             const option2 = [...arrayOption2]
             option[0] == '' ? option.shift() : option
             option2[0] == '' ? option2.shift() : option2
+            mostrarBotao = true
             
             if(marcaVeiculo)  {
                
@@ -63,6 +67,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 option4[0] == '' ? option4.shift() : option4
 
                 formSelectModel = true
+                
             }
             if(modeloVeiculo){
 
@@ -121,16 +126,16 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 let links2 =  await page.$$eval('.yuRUbf a', item => item.map((link: any) => { return link.href }))
                 
                 for(const item of links2 ){
-                    
+                    let x = 1
                     if(item.indexOf('lista.mercadolivre.com.br') > -1 ){
-                        
+                        if(x === 2) continue
                         await page.goto(item,{ timeout: 0})
                         await page.waitForSelector('.ui-search-result__image')
                         let linksML = await page.$$eval('.ui-search-result__image a', item => item.map((link: any) => { return link.href }))
                         let i = 1
                         for (let link of linksML) {
                             
-                            if(i === 6) continue
+                            if(i === 4) continue
                             await page.goto(link,{ timeout: 0})
                             let imgML = await page.$$eval('.ui-pdp-gallery__figure__image',  item => item.map((link: any) => { return link.src }))
                             let titleML = await page.$eval('.ui-pdp-title', (item: any) => item.innerText)
@@ -151,11 +156,53 @@ export const searchVeiculos = (req: Request, response: Response) => {
                             i++
                         }
                         
+                        x++
+                    }
+
+                    if(item.indexOf('icarros.com.br') > -1 ){
+                        await page.goto(item,{ timeout: 0})
+                        await page.waitForSelector('.col-xs-6.col-md-4').then(()=>{
+
+                        }).catch(e => {
+                            e.continue
+                        })
+                       
+                        let linksIc = await page.$$eval('.col-xs-6.col-md-4 a', item => item.map((link: any) => { return link.href }))
+                        
+                        // let linksParaImg = await page.$$eval('.sc-gzOgki.jwzpnh a', item => item.map((link: any) => { return link }))
+                        console.log(linksIc)
+                        let i = 1
+                        for (let link of linksIc) {
+                            if(i === 4) continue
+                            await page.goto(link,{ timeout: 0})
+                            let imgIc = await page.$eval('.swiper-slide.swiper-slide-active img',  (item: any)=>  item.src)
+                            let titleIc = await page.$eval('.titulo-sm',  (item: any) =>  item.innerText)
+                            let precoIc = await page.$eval('.preco',  (item: any) =>  item.innerText)
+                            let anoIc = await page.$eval('.listahorizontal .primeiro .destaque',  (item: any) =>  item.innerText)
+                            let kmIcarros = await page.$$eval('.card-informacoes-basicas .card-conteudo .listahorizontal li .destaque',  item =>  item.map((item: any) =>  item.innerText ))
+                            console.log(kmIcarros)
+                            let kmIc = kmIcarros[1]
+                            const objIC = {
+                                title : titleIc,
+                                img: imgIc,
+                                anoEKmVeiculo: `Ano: ${anoIc}  Km: ${kmIc}`,
+                                precoVeiculow: precoIc ,
+                                link
+                            }
+                            listIcarros.push(objIC)
+                            if(listIcarros.length > 0){
+                                anunciosSelectsIcarros = true
+                            }
+                            
+                            i++
+                        }
+                        
                        
                     }
                     
                 }
                 console.log(list)
+                console.log(listIcarros)
                 console.log(links2)
 
             }
@@ -167,6 +214,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 formSelect: true,
                 formSelectModel,
                 formSelectAnoCar,
+                mostrarBotao,
                 carro: true,
                 marcaVeiculo,
                 modeloVeiculo,
@@ -183,8 +231,12 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 anuncio1: list[0],
                 anuncio2: list[1],
                 anuncio3: list[2],
-                anuncio4: list[3],
-                anuncio5: list[4],
+                // anuncio4: list[3],
+                // anuncio5: list[4],
+                anunciosSelectsIcarros,
+                anuncioIcarros1: listIcarros[0],
+                anuncioIcarros2: listIcarros[1],
+                anuncioIcarros3: listIcarros[2],
             })
             
             
@@ -199,6 +251,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
             const option2 = [...arrayOption2]
             option[0] == '' ? option.shift() : option
             option2[0] == '' ? option2.shift() : option2
+            mostrarBotao = true
 
             if(marcaVeiculo)  {
                
@@ -217,6 +270,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 option4[0] == '' ? option4.shift() : option4
 
                 formSelectModel = true
+                
             }
             if(modeloVeiculo){
 
@@ -274,8 +328,9 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 let links2 =  await page.$$eval('.yuRUbf a', item => item.map((link: any) => { return link.href }))
                 
                 for(const item of links2 ){
-                    
+                    let x = 1
                     if(item.indexOf('lista.mercadolivre.com.br') > -1 ){
+                        if(x === 2) continue
                         await page.goto(item,{ timeout: 0})
                         await page.waitForSelector('.ui-search-result__image')
                         let linksML = await page.$$eval('.ui-search-result__image a', item => item.map((link: any) => { return link.href }))
@@ -301,12 +356,51 @@ export const searchVeiculos = (req: Request, response: Response) => {
                             i++
                         }
                         
+                    }
+                    if(item.indexOf('icarros.com.br') > -1 ){
+                        await page.goto(item,{ timeout: 0})
+                        await page.waitForSelector('.col-xs-6.col-md-4').then(()=>{
+
+                        }).catch(e => {
+                            e.continue
+                        })
+                       
+                        let linksIc = await page.$$eval('.col-xs-6.col-md-4 a', item => item.map((link: any) => { return link.href }))
+                        
+                        // let linksParaImg = await page.$$eval('.sc-gzOgki.jwzpnh a', item => item.map((link: any) => { return link }))
+                        console.log(linksIc)
+                        let i = 1
+                        for (let link of linksIc) {
+                            if(i === 4) continue
+                            await page.goto(link,{ timeout: 0})
+                            let imgIc = await page.$eval('.swiper-slide.swiper-slide-active img',  (item: any)=>  item.src)
+                            let titleIc = await page.$eval('.titulo-sm',  (item: any) =>  item.innerText)
+                            let precoIc = await page.$eval('.preco',  (item: any) =>  item.innerText)
+                            let anoIc = await page.$eval('.listahorizontal .primeiro .destaque',  (item: any) =>  item.innerText)
+                            let kmIcarros = await page.$$eval('.card-informacoes-basicas .card-conteudo .listahorizontal li .destaque',  item =>  item.map((item: any) =>  item.innerText ))
+                            console.log(kmIcarros)
+                            let kmIc = kmIcarros[1]
+                            const objIC = {
+                                title : titleIc,
+                                img: imgIc,
+                                anoEKmVeiculo: `Ano: ${anoIc}  Km: ${kmIc}`,
+                                precoVeiculow: precoIc ,
+                                link
+                            }
+                            listIcarros.push(objIC)
+                            if(listIcarros.length > 0){
+                                anunciosSelectsIcarros = true
+                            }
+                            
+                            i++
+                        }
+                        
                        
                     }
-                    
                 }
 
                 console.log(list)
+                console.log(listIcarros)
                 console.log(links2)
             }
             
@@ -320,6 +414,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 option3: option5,
                 formSelectModel,
                 formSelectAnoCar,
+                mostrarBotao,
                 marcaVeiculo,
                 modeloVeiculo,
                 anoVeiculo,
@@ -337,6 +432,10 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 anuncio3: list[2],
                 anuncio4: list[3],
                 anuncio5: list[4],
+                anunciosSelectsIcarros,
+                anuncioIcarros1: listIcarros[0],
+                anuncioIcarros2: listIcarros[1],
+                anuncioIcarros3: listIcarros[2],
             }
         )}
 
@@ -349,6 +448,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
             const option2 = [...arrayOption2]
             option[0] == '' ? option.shift() : option
             option2[0] == '' ? option2.shift() : option2
+            mostrarBotao = true
 
             if(marcaVeiculo)  {
                
@@ -367,6 +467,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 option4[0] == '' ? option4.shift() : option4
 
                 formSelectModel = true
+                
             }
             if(modeloVeiculo){
 
@@ -425,8 +526,9 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 let links2 =  await page.$$eval('.yuRUbf a', item => item.map((link: any) => { return link.href }))
                 
                 for(const item of links2 ){
-                    
+                    let x = 1
                     if(item.indexOf('lista.mercadolivre.com.br') > -1 ){
+                        if(x === 2) continue
                         await page.goto(item,{ timeout: 0})
                         await page.waitForSelector('.ui-search-result__image')
                         let linksML = await page.$$eval('.ui-search-result__image a', item => item.map((link: any) => { return link.href }))
@@ -450,14 +552,53 @@ export const searchVeiculos = (req: Request, response: Response) => {
                                 anunciosSelects = true
                             }
                             i++
-                        }
+                        } 
+                    }
+                    // if(item.indexOf('icarros.com.br') > -1 ){
+                    //     await page.goto(item,{ timeout: 0})
+                    //     await page.waitForSelector('.col-xs-6.col-md-4').then(()=>{
+
+                    //     }).catch(e => {
+                    //         e.continue
+                    //     })
+                       
+                    //     let linksIc = await page.$$eval('.col-xs-6.col-md-4 a', item => item.map((link: any) => { return link.href }))
+                        
+                    //     // let linksParaImg = await page.$$eval('.sc-gzOgki.jwzpnh a', item => item.map((link: any) => { return link }))
+                    //     console.log(linksIc)
+                    //     let i = 1
+                    //     for (let link of linksIc) {
+                    //         if(i === 4) continue
+                    //         await page.goto(link,{ timeout: 0})
+                    //         let imgIc = await page.$eval('.swiper-slide.swiper-slide-active img',  (item: any)=>  item.src)
+                    //         let titleIc = await page.$eval('.titulo-sm',  (item: any) =>  item.innerText)
+                    //         let precoIc = await page.$eval('.preco',  (item: any) =>  item.innerText)
+                    //         let anoIc = await page.$eval('.listahorizontal .primeiro .destaque',  (item: any) =>  item.innerText)
+                    //         let kmIcarros = await page.$$eval('.card-informacoes-basicas .card-conteudo .listahorizontal li .destaque',  item =>  item.map((item: any) =>  item.innerText ))
+                    //         console.log(kmIcarros)
+                    //         let kmIc = kmIcarros[1]
+                    //         const objIC = {
+                    //             title : titleIc,
+                    //             img: imgIc,
+                    //             anoEKmVeiculo: `Ano: ${anoIc}  Km: ${kmIc}`,
+                    //             precoVeiculow: precoIc ,
+                    //             link
+                    //         }
+                    //         listIcarros.push(objIC)
+                    //         if(listIcarros.length > 0){
+                    //             anunciosSelectsIcarros = true
+                    //         }
+                            
+                    //         i++
+                    //     }
                         
                        
-                    }
+                    // }
                     
                 }
 
                 console.log(list)
+                console.log(listIcarros)
                 console.log(links2)
                 
 
@@ -472,6 +613,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 option3: option5,
                 formSelectModel,
                 formSelectAnoCar,
+                mostrarBotao,
                 marcaVeiculo,
                 modeloVeiculo,
                 anoVeiculo,
@@ -489,6 +631,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 anuncio3: list[2],
                 anuncio4: list[3],
                 anuncio5: list[4],
+                anunciosSelectsIcarros,
             }
         )}
         
