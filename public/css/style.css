@@ -1,3 +1,231 @@
 body {
-    background-color: #CCC;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+.area1-container {
+    height: 100vh;
+    background-image: url(../images/background1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* opacity: 0.8; */
+}
+
+.area1 {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.2);
+}
+.area-title {
+    width: 680px;
+    height: 230px;
+    background-color: #19539A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.area-title h1 {
+   
+    font-size: 80px;
+    font-weight: 900;
+    color: #FFF;
+    margin: 0;
+}
+
+form {
+    margin-top: 30px;
+    padding: 15px 30px;
+    border-radius: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.select2-container {
+    width: auto !important;
+    margin-top: 15px !important;
+    
+}
+.select2-container--default .select2-selection--single {
+    background-color: #19539A !important;
+    border: none !important;
+    width: 535px !important;
+    height: 55px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff !important;
+    line-height: 55px !important;
+    text-align: center !important;
+    font-size: 22px !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 55px !important;
+    position: absolute !important;
+    top: 1px !important;
+    right: 11px !important;
+    width: 25px !important;
+    
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #FFF transparent transparent transparent !important;
+    border-width: 10px 9px 0 9px !important;
+    margin-left: -12px !important;
+    
+}
+
+form a {
+    width: 535px;
+    height: 65px;
+    border-radius: 10px;
+    background-color: #FFF;
+    color: #19539A;
+    margin-top: 15px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.area2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.2);
+}
+.area2-resultado {
+    border-radius: 15px;
+    background-color: #19539A;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding: 18px 8px;
+}
+.area2-resultado p {
+    font-size:22px;
+    margin: 7px;
+}
+.area2-resultado-preco {
+    width: 340px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.area2-resultado-preco p {
+    font-size:22px;
+    color: #19539A;
+    background-color: #FFF;
+    padding: 15px;
+    border-radius: 25px;
+    font-weight: 900;
+}
+.area2-anuncios {
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 45px;
+}
+.area2-anuncios-ml {
+    width: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFE501;
+    border-radius: 20px;
+    padding: 20px 0px;
+}
+.area2-anuncios-ml-title,
+.area2-anuncios-ic-title {
+    background-color: #FFF;
+    width: 80%;
+    border-radius: 20px;
+}
+.area2-anuncios-ml-title h2,
+.area2-anuncios-ic-title h2 {
+    font-size: 22px;
+    text-align: center;
+}
+.area2-anuncios-ml-logo,
+.area2-anuncios-ic-logo {
+    width: 145px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.area2-anuncios-ml-logo img{
+    width: 100%;
+}
+.area2-anuncios-ic-logo img {
+    width: 75%;
+}
+.anuncios-area {
+    width: 480px;
+    height:135px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    background-color: #FFF;
+    margin-top: 20px;
+}
+.anuncios-area a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+}
+.anuncios-area-img {
+    width: 135px;
+    height:100px;
+}
+.anuncios-area-img img {
+    width: 100%;
+    height: 100%;
+}
+.anuncios-area-desc {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.anuncios-area-desc h1,
+.anuncios-area-desc h2,
+.anuncios-area-desc h3 {
+    margin: 0;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+}
+.anuncios-area-desc h2 {
+    font-size: 15px;
+}
+.area2-anuncios-ic {
+    width: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #19539A;
+    padding: 20px 0px;
+    border-radius: 20px;
 }

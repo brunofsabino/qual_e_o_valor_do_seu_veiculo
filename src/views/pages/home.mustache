@@ -1,10 +1,14 @@
 {{>partials/header}}
 
-
+<div class="area1-container">
+<section class="area1">
+<div class="area-title">
+    <h1>Qual é o valor do seu veículo?</h1>
+</div>
 <form method="post" action="/">
-    <h2>Escolha o tipo de veiculo a ser pesquisado:</h2>
+    
 <select class="form-select" name="select" onchange="mostraAlerta()" >
-    <option></option>
+    <option>Escolha uma opção </option>
     <option select="1" {{#carro}} selected {{/carro}} >Consulta de Carros e utilitários pequenos</option>
     <option select="2"  {{#caminhao}} selected {{/caminhao}}>Consulta de Caminhões e Micro-Ônibus</option>
     <option select="3" {{#moto}} selected {{/moto}} >Consulta de motos</option>
@@ -12,7 +16,7 @@
 </select>
 {{#formSelect}}
 <select class="form-select-1" name="select1" onchange="mostraAlerta()" >
-    <option></option>
+    <option> Digite ou selecione a marca do veículo </option>
     {{#marcaVeiculo}}
         <option value="{{marcaVeiculo}}" selected> {{marcaVeiculo}} </option>
     {{/marcaVeiculo}}
@@ -24,7 +28,7 @@
 
 {{#formSelectModel}}
 <select class="form-select-2" name="select2" onchange="mostraAlerta()" >
-    <option></option>
+    <option>Digite ou selecione o modelo do veículo</option>
     {{#modeloVeiculo}}
         <option value="{{modeloVeiculo}}" selected> {{modeloVeiculo}} </option> 
     {{/modeloVeiculo}}  
@@ -37,7 +41,7 @@
 
 {{#formSelectAnoCar}}
 <select class="form-select-3" name="select3" onchange="mostraAlerta()" >
-    <option></option>
+    <option>Digite ou selecione o ano modelo do veículo</option>
     {{#anoVeiculo}}
         <option value="{{anoVeiculo}}" selected> {{anoVeiculo}} </option> 
     {{/anoVeiculo}} 
@@ -56,94 +60,177 @@
 {{/mostrarBotao}}
 </form>
 
-{{#mesReferencia}}
-Mês de Referencia: {{mesReferencia}}<br>
-Código Fipe:  {{codigoFipe}}<br>
-Marca: {{marca}}<br>
-Modelo: {{modelo}}<br>
-Ano Modelo: {{anoModelo}}<br>
-Autentificação: {{autenficacao}}<br>
-Data da Consulta: {{dataConsulta}}<br>
-Preço Médio: {{precoMedio}}                
-{{/mesReferencia}}
-
-{{#anunciosSelects}}
-<div class="anuncios-area">
-    {{#anuncio1}}
-        <a href="{{anuncio1.link}}">
-            <h1>{{anuncio1.title}}</h1>
-            <h2>{{anuncio1.anoEKmVeiculo}}</h2>
-            <img src="{{anuncio1.img}}" alt="" style="width: 300px">
-            <h3>R$ {{anuncio1.precoVeiculow}}</h3>
-        </a>
-    {{/anuncio1}} <br><br>
-    {{#anuncio2}}
-        <a href="{{anuncio2.link}}">
-            <h1>{{anuncio2.title}}</h1>
-            <h2>{{anuncio2.anoEKmVeiculo}}</h2>
-            <img src="{{anuncio2.img}}" alt="" style="width: 300px">
-            <h3>R$ {{anuncio2.precoVeiculow}}</h3>
-        </a>
-    {{/anuncio2}} <br><br>
-    {{#anuncio3}}
-        <a href="{{anuncio3.link}}">
-            <h1>{{anuncio3.title}}</h1>
-            <h2>{{anuncio3.anoEKmVeiculo}}</h2>
-            <img src="{{anuncio3.img}}" alt="" style="width: 300px">
-            <h3>R$ {{anuncio3.precoVeiculow}}</h3>
-        </a>
-    {{/anuncio3}} <br><br>
-    {{#anuncio4}}
-        <a href="{{anuncio4.link}}">
-            <h1>{{anuncio4.title}}</h1>
-            <h2>{{anuncio4.anoEKmVeiculo}}</h2>
-            <img src="{{anuncio4.img}}" alt="" style="width: 300px">
-            <h3>R$ {{anuncio4.precoVeiculow}}</h3>
-        </a>
-    {{/anuncio4}} <br><br>
-    {{#anuncio5}}
-        <a href="{{anuncio5.link}}">
-            <h1>{{anuncio5.title}}</h1>
-            <h2>{{anuncio5.anoEKmVeiculo}}</h2>
-            <img src="{{anuncio5.img}}" alt="" style="width: 300px">
-            <h3>R$ {{anuncio5.precoVeiculow}}</h3>
-        </a>
-    {{/anuncio5}} <br><br>
+</section >
 </div>
+
+<section class="area2">
+<div class="area2-resultado">
+{{#mesReferencia}}
+<p>Mês de Referencia: {{mesReferencia}}</p>
+<p>Código Fipe:  {{codigoFipe}}</p>
+<p>Marca: {{marca}}</p>
+<p>Modelo: {{modelo}}</p>
+<p>Ano Modelo: {{anoModelo}}</p>
+<p>Autentificação: {{autenficacao}}</p>
+<p>Data da Consulta: {{dataConsulta}}</p>
+<div class="area2-resultado-preco">
+<p>Preço Médio: {{precoMedio}}</p>  
+</div>          
+{{/mesReferencia}}
+</div>
+
+<div class="area2-anuncios">
+{{#anunciosSelects}}
+<div class="area2-anuncios-ml">
+<div class="area2-anuncios-ml-title">
+    <h2>Anúncios do {{modelo}} no Mercado Livre</h2>
+</div>
+<div class="area2-anuncios-ml-logo">
+    <img src="/images/mercado-livre 1.png" alt="">
+</div>
+{{#anuncio1}}
+<div class="anuncios-area">
+    
+        <a href="{{anuncio1.link}}" target="_blank">
+            <div class="anuncios-area-img">
+                <img src="{{anuncio1.img}}" alt="">
+            </div>
+            <div class="anuncios-area-desc">
+                <h1>{{anuncio1.title}}</h1>
+                <h2>{{anuncio1.anoEKmVeiculo}}</h2>
+                <h3>R$ {{anuncio1.precoVeiculow}}</h3>
+            </div>
+        </a>
+    
+</div>
+{{/anuncio1}} 
+{{#anuncio2}}
+<div class="anuncios-area">
+    
+        <a href="{{anuncio2.link}}" target="_blank">
+            <div class="anuncios-area-img">
+                <img src="{{anuncio2.img}}" alt="">
+            </div>
+            <div class="anuncios-area-desc">
+                <h1>{{anuncio2.title}}</h1>
+                <h2>{{anuncio2.anoEKmVeiculo}}</h2>
+                <h3>R$ {{anuncio2.precoVeiculow}}</h3>
+            </div>
+        </a>
+    
+</div>
+{{/anuncio2}} 
+{{#anuncio3}}
+<div class="anuncios-area">
+    
+        <a href="{{anuncio3.link}}" target="_blank">
+            <div class="anuncios-area-img">
+                <img src="{{anuncio3.img}}" alt="">
+            </div>
+            <div class="anuncios-area-desc">
+                <h1>{{anuncio3.title}}</h1>
+                <h2>{{anuncio3.anoEKmVeiculo}}</h2>
+                <h3>R$ {{anuncio3.precoVeiculow}}</h3>
+            </div>
+        </a>
+    
+</div>
+{{/anuncio3}} 
+{{#anuncio4}}
+<div class="anuncios-area">
+    
+        <a href="{{anuncio4.link}}" target="_blank">
+            <div class="anuncios-area-img">
+                <img src="{{anuncio4.img}}" alt="">
+            </div>
+            <div class="anuncios-area-desc">
+                <h1>{{anuncio4.title}}</h1>
+                <h2>{{anuncio4.anoEKmVeiculo}}</h2>
+                <h3>R$ {{anuncio4.precoVeiculow}}</h3>
+            </div>
+        </a>
+   
+</div>
+{{/anuncio4}} 
+{{#anuncio5}}
+<div class="anuncios-area">
+    
+        <a href="{{anuncio5.link}}" target="_blank">
+            <div class="anuncios-area-img">
+                <img src="{{anuncio5.img}}" alt="">
+            </div>
+            <div class="anuncios-area-desc">
+                <h1>{{anuncio5.title}}</h1>
+                <h2>{{anuncio5.anoEKmVeiculo}}</h2>
+                <h3>R$ {{anuncio5.precoVeiculow}}</h3>
+            </div>
+        </a>
+    
+</div>
+{{/anuncio5}} 
 {{/anunciosSelects}}
+</div>
 
 {{#anunciosSelectsIcarros}}
-<div class="anuncios-area">
-    {{#anuncioIcarros1}}
-        <a href="{{anuncioIcarros1.link}}">
-            <h1>{{anuncioIcarros1.title}}</h1>
-            <h2>{{anuncioIcarros1.anoEKmVeiculo}}</h2>
-            <img src="{{anuncioIcarros1.img}}" alt="" style="width: 300px">
-            <h3>R$ {{anuncioIcarros1.precoVeiculow}}</h3>
-        </a>
-    {{/anuncioIcarros1}} <br><br>
-    {{#anuncioIcarros2}}
-        <a href="{{anuncioIcarros2.link}}">
-            <h1>{{anuncioIcarros2.title}}</h1>
-            <h2>{{anuncioIcarros2.anoEKmVeiculo}}</h2>
-            <img src="{{anuncioIcarros2.img}}" alt="" style="width: 300px">
-            <h3>R$ {{anuncioIcarros2.precoVeiculow}}</h3>
-        </a>
-    {{/anuncioIcarros2}} <br><br>
-    {{#anuncioIcarros3}}
-        <a href="{{anuncioIcarros3.link}}">
-            <h1>{{anuncioIcarros3.title}}</h1>
-            <h2>{{anuncioIcarros3.anoEKmVeiculo}}</h2>
-            <img src="{{anuncioIcarros3.img}}" alt="" style="width: 300px">
-            <h3>R$ {{anuncioIcarros3.precoVeiculow}}</h3>
-        </a>
-    {{/anuncioIcarros3}} <br><br>
-    <br><br>
+<div class="area2-anuncios-ic">
+<div class="area2-anuncios-ic-title">
+    <h2>Anúncios do {{modelo}} no Mercado Livre</h2>
 </div>
+<div class="area2-anuncios-ic-logo">
+    <img src="/images/icarros.png" alt="">
+</div>
+{{#anuncioIcarros1}}
+<div class="anuncios-area">
+    
+        <a href="{{anuncioIcarros1.link}}" target="_blank">
+            <div class="anuncios-area-img">
+                <img src="{{anuncioIcarros1.img}}" alt="">
+            </div>
+            <div class="anuncios-area-desc">
+                <h1>{{anuncioIcarros1.title}}</h1>
+                <h2>{{anuncioIcarros1.anoEKmVeiculo}}</h2>
+                <h3>R$ {{anuncioIcarros1.precoVeiculow}}</h3>
+            </div>
+        </a>
+    
+</div>
+{{/anuncioIcarros1}}
+{{#anuncioIcarros2}}
+<div class="anuncios-area">
+    
+        <a href="{{anuncioIcarros2.link}}" target="_blank">
+            <div class="anuncios-area-img">
+                <img src="{{anuncioIcarros2.img}}" alt="">
+            </div>
+            <div class="anuncios-area-desc">
+                <h1>{{anuncioIcarros2.title}}</h1>
+                <h2>{{anuncioIcarros2.anoEKmVeiculo}}</h2>
+                <h3>R$ {{anuncioIcarros2.precoVeiculow}}</h3>
+            </div>
+        </a>
+    
+</div>
+{{/anuncioIcarros2}}
+{{#anuncioIcarros3}}
+<div class="anuncios-area">
+   
+        <a href="{{anuncioIcarros3.link}}" target="_blank">
+            <div class="anuncios-area-img">
+                <img src="{{anuncioIcarros3.img}}" alt="">
+            </div>
+            <div class="anuncios-area-desc">
+                <h1>{{anuncioIcarros3.title}}</h1>
+                <h2>{{anuncioIcarros3.anoEKmVeiculo}}</h2>
+                <h3>R$ {{anuncioIcarros3.precoVeiculow}}</h3>
+            </div>
+        </a>
+    
+</div>
+{{/anuncioIcarros3}}
 {{/anunciosSelectsIcarros}}
+</div>
+</div>
 
-
-
-
+</section>
 
 {{>partials/footer}}
