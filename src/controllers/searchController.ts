@@ -164,41 +164,11 @@ export const searchVeiculos = (req: Request, response: Response) => {
                         await page.waitForSelector('.col-xs-6.col-md-4').then(()=>{
 
                         }).catch(e => {
-                            // e.continue
-                            // let linksIc2 =  page.$$eval('.anuncio_container.false .clearfix.dados_anuncio .clearfix', item => item.map((link: any) => { return link.href }))
-                            // console.log(linksIc2)
-                            // let i = 1
                             e.continue
-                            // for (let link of linksIc2) {
-                            //     if(i === 4) continue
-                            //      page.goto(link,{ timeout: 0})
-                            //     let imgIc =  page.$eval('.swiper-slide.swiper-slide-active img',  (item: any)=>  item.src)
-                            //     let titleIc =  page.$eval('.titulo-sm',  (item: any) =>  item.innerText)
-                            //     let precoIc =  page.$eval('.preco',  (item: any) =>  item.innerText)
-                            //     let anoIc =  page.$eval('.listahorizontal .primeiro .destaque',  (item: any) =>  item.innerText)
-                            //     let kmIcarros =  page.$$eval('.card-informacoes-basicas .card-conteudo .listahorizontal li .destaque',  item =>  item.map((item: any) =>  item.innerText ))
-                            //     console.log(kmIcarros)
-                            //     let kmIc = kmIcarros[1]
-                            //     const objIC = {
-                            //         title : titleIc,
-                            //         img: imgIc,
-                            //         anoEKmVeiculo: `Ano: ${anoIc}  Km: ${kmIc}`,
-                            //         precoVeiculow: precoIc ,
-                            //         link
-                            //     }
-                            //     listIcarros.push(objIC)
-                            //     if(listIcarros.length > 0){
-                            //         anunciosSelectsIcarros = true
-                            //     }
-                                
-                            //     i++
-                            // }
                             })
                        
                         let linksIc = await page.$$eval('.col-xs-6.col-md-4 a', item => item.map((link: any) => { return link.href }))
                         
-                        // let linksParaImg = await page.$$eval('.sc-gzOgki.jwzpnh a', item => item.map((link: any) => { return link }))
-                        console.log(linksIc)
                         let i = 1
                         for (let link of linksIc) {
                             if(i === 4) continue
@@ -208,7 +178,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                             let precoIc = await page.$eval('.preco',  (item: any) =>  item.innerText)
                             let anoIc = await page.$eval('.listahorizontal .primeiro .destaque',  (item: any) =>  item.innerText)
                             let kmIcarros = await page.$$eval('.card-informacoes-basicas .card-conteudo .listahorizontal li .destaque',  item =>  item.map((item: any) =>  item.innerText ))
-                            console.log(kmIcarros)
+                            
                             let kmIc = kmIcarros[1]
                             const objIC = {
                                 title : titleIc,
