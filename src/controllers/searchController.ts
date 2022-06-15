@@ -119,7 +119,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
 
                 await page.goto(google,{ timeout: 0});
                 await page.waitForSelector('.gLFyf')
-                await page.type('.gLFyf.gsfi', `comprar ${modelo} ${anoModelo}`)
+                await page.type('.gLFyf.gsfi', `comprar ${modelo}`)
                 await page.keyboard.press('Enter')
                 await page.waitForSelector('.yuRUbf')
         
@@ -135,7 +135,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                         let i = 1
                         for (let link of linksML) {
                             
-                            if(i === 4) continue
+                            if(i === 6) continue
                             await page.goto(link,{ timeout: 0})
                             let imgML = await page.$$eval('.ui-pdp-gallery__figure__image',  item => item.map((link: any) => { return link.src }))
                             let titleML = await page.$eval('.ui-pdp-title', (item: any) => item.innerText)
@@ -164,8 +164,36 @@ export const searchVeiculos = (req: Request, response: Response) => {
                         await page.waitForSelector('.col-xs-6.col-md-4').then(()=>{
 
                         }).catch(e => {
+                            // e.continue
+                            // let linksIc2 =  page.$$eval('.anuncio_container.false .clearfix.dados_anuncio .clearfix', item => item.map((link: any) => { return link.href }))
+                            // console.log(linksIc2)
+                            // let i = 1
                             e.continue
-                        })
+                            // for (let link of linksIc2) {
+                            //     if(i === 4) continue
+                            //      page.goto(link,{ timeout: 0})
+                            //     let imgIc =  page.$eval('.swiper-slide.swiper-slide-active img',  (item: any)=>  item.src)
+                            //     let titleIc =  page.$eval('.titulo-sm',  (item: any) =>  item.innerText)
+                            //     let precoIc =  page.$eval('.preco',  (item: any) =>  item.innerText)
+                            //     let anoIc =  page.$eval('.listahorizontal .primeiro .destaque',  (item: any) =>  item.innerText)
+                            //     let kmIcarros =  page.$$eval('.card-informacoes-basicas .card-conteudo .listahorizontal li .destaque',  item =>  item.map((item: any) =>  item.innerText ))
+                            //     console.log(kmIcarros)
+                            //     let kmIc = kmIcarros[1]
+                            //     const objIC = {
+                            //         title : titleIc,
+                            //         img: imgIc,
+                            //         anoEKmVeiculo: `Ano: ${anoIc}  Km: ${kmIc}`,
+                            //         precoVeiculow: precoIc ,
+                            //         link
+                            //     }
+                            //     listIcarros.push(objIC)
+                            //     if(listIcarros.length > 0){
+                            //         anunciosSelectsIcarros = true
+                            //     }
+                                
+                            //     i++
+                            // }
+                            })
                        
                         let linksIc = await page.$$eval('.col-xs-6.col-md-4 a', item => item.map((link: any) => { return link.href }))
                         
@@ -231,8 +259,8 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 anuncio1: list[0],
                 anuncio2: list[1],
                 anuncio3: list[2],
-                // anuncio4: list[3],
-                // anuncio5: list[4],
+                anuncio4: list[3],
+                anuncio5: list[4],
                 anunciosSelectsIcarros,
                 anuncioIcarros1: listIcarros[0],
                 anuncioIcarros2: listIcarros[1],
