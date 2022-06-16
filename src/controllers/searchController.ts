@@ -112,14 +112,17 @@ export const searchVeiculos = (req: Request, response: Response) => {
                 codigoFipe = arrayValues[3]
                 marca = arrayValues[5]
                 modelo = arrayValues[7]
-                anoModelo = arrayValues[9]
+                let anoModelo1 = arrayValues[9]
+                let anoModeloArray = anoModelo1.split(' ')[0]
+                anoModelo = anoModeloArray
+                console.log(anoModelo)
                 autenficacao = arrayValues[11]
                 dataConsulta = arrayValues[13]
                 precoMedio = arrayValues[15]
 
                 await page.goto(google,{ timeout: 0});
                 await page.waitForSelector('.gLFyf')
-                await page.type('.gLFyf.gsfi', `comprar ${modelo}`)
+                await page.type('.gLFyf.gsfi', `comprar ${modelo} ${anoModelo}`)
                 await page.keyboard.press('Enter')
                 await page.waitForSelector('.yuRUbf')
         
@@ -159,7 +162,7 @@ export const searchVeiculos = (req: Request, response: Response) => {
                         x++
                     }
 
-                    if(item.indexOf('icarros.com.br') > -1 ){
+                    if(item.indexOf('icarros.com.br/tabela-fipe') > -1 ){
                         await page.goto(item,{ timeout: 0})
                         await page.waitForSelector('.col-xs-6.col-md-4').then(()=>{
 
