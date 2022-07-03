@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import puppeteer, { HTTPRequest, HTTPResponse } from 'puppeteer'
+import puppeteer from 'puppeteer'
 
 
 export const searchVeiculos = (req: Request, response: Response) => {

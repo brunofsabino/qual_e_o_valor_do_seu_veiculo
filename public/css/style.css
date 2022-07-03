@@ -3,6 +3,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    background-color: gainsboro;
 }
 .area1-container {
     height: 100vh;

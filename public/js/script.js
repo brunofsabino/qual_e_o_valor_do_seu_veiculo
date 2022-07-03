@@ -8,16 +8,6 @@ function mostraAlerta(elemento){
     
     let selectOptions = document.querySelectorAll('.form-select-1 option')
    
-    // let selectValue2 = select2.options
-    // let arraySelect = [...selectOptions]
-    // arraySelect.forEach( item => {
-    //     // console.log(item.value)
-    //     if(item.value == selectValue){
-    //         console.log('entrou')
-    //         item.classList.add('selected')
-    //     }
-    // })
-    // console.log(arraySelect)
     
 }
 
