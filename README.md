@@ -1,5 +1,5 @@
 # API - Qual é o valor do seu veículo?
-Esta API realiza web-scraping dinamico no site da Tabela Fipe e retorna informações sobre os dos veículos pesquisdos. Sejam carros, motos ou caminhões. </br>
+Esta API realiza web-scraping dinâmico no site da Tabela Fipe e retorna informações sobre os dos veículos pesquisados. Sejam carros, motos ou caminhões. </br>
 
 Link para utilizaram a API rodando via Template Engine Mustache-Express.</br>
 <a href="https://brunoferrazsabino.dev/qual-o-valor-do-seu-veiculo" target="_blank">https://brunoferrazsabino.dev/qual-o-valor-do-seu-veiculo</a>
